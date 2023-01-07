@@ -15,4 +15,4 @@ const mix = require('laravel-mix');
  .sass('resources/sass/app.scss', 'public/css')
  .sourceMaps();
 
-//mix.browserSync('localhost');
+mix.browserSync('localhost:8000');
