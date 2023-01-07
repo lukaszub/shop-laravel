@@ -13,8 +13,7 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-    <!-- Scripts -->
-    <script src="{{ mix('js/app.js') }}" defer></script>
+
 </head>
 <body>
     <div id="app">
@@ -77,5 +76,10 @@
             @yield('content')
         </main>
     </div>
+        <!-- Scripts -->
+        <script src="{{ mix('js/app.js') }}"></script>
+        <script type="text/javascript">
+            @yield('javascript')
+        </script>    
 </body>
 </html>

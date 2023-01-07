@@ -21,7 +21,9 @@
           <td>{{ $user->name }}</td>
           <td>{{ $user->surname }}</td>
           <td>{{ $user->phone_number }}</td>
-          <td></td>
+          <td>
+            <button class="btn btn-danger btn-sm delete" data-id="{{ $user->id }}">X</button>
+          </td>
         </tr>        
       @endforeach
     </tbody>
@@ -29,5 +31,20 @@
 
   {{ $users->links() }}
 </div>
-
+@endsection
+@section('javascript')
+  $(function(){
+    $('.delete').click(function(){
+      $.ajax({
+        method: "DELETE",
+        url: "localhost:8000/users/" + $(this).data("id"),
+        //data: {id: $(this).data("id") }
+      }).done(function(response){
+        window.location.reload();
+        alert("Success" + response);
+      }).fail(function(response){
+        alert("Error" + response);
+      });
+    });
+  });  
 @endsection
