@@ -3,6 +3,7 @@ window._ = _;
 
 import $ from 'jquery';
 window.$ = $;
+window.Swal = require('sweetalert2');
 
 import 'bootstrap';
 

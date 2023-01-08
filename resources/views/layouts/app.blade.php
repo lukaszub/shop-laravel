@@ -80,6 +80,7 @@
         <script src="{{ mix('js/app.js') }}"></script>
         <script type="text/javascript">
             @yield('javascript')
-        </script>    
+        </script>
+        @yield('javascript-files')    
 </body>
 </html>
