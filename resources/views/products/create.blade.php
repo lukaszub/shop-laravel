@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
     <div class="col-md-8">
     <div class="card">
-        <div class="card-header">Dodawanie produktu</div>
+        <div class="card-header">{{ __('shop.product.add_title') }}</div>
 
         <div class="card-body">
             <form method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data">
@@ -72,7 +72,7 @@
                     <label for="image" class="col-md-4 col-form-label text-md-end">Grafika</label>
 
                     <div class="col-md-6">
-                        <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image">
+                        <input id="image" type="file" class="form-control @error('') is-invalid @enderror" name="image">
 
                         @error('image')
                             <span class="invalid-feedback" role="alert">
