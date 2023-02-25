@@ -58,7 +58,7 @@
                     <label for="price" class="col-md-4 col-form-label text-md-end">Cena</label>
 
                     <div class="col-md-6">
-                        <input id="price" type="number" step="0.01" min="0" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ old('price')}}" required autocomplete="price">
+                        <input id="price" type="number" step="0.01" min="1" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ old('price')}}" required autocomplete="price">
 
                         @error('price')
                             <span class="invalid-feedback" role="alert">
@@ -72,7 +72,7 @@
                     <label for="image" class="col-md-4 col-form-label text-md-end">Grafika</label>
 
                     <div class="col-md-6">
-                        <input id="image" type="file" class="form-control" name="image">
+                        <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image">
 
                         @error('image')
                             <span class="invalid-feedback" role="alert">

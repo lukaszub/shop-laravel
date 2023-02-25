@@ -6,6 +6,7 @@ use Exception;
 use App\Models\Product;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreProductRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\View\View as ViewView;
 
@@ -19,7 +20,7 @@ class ProductController extends Controller
     public function index()
     {
         return view('products.index',[
-            'products' => Product::paginate(3)
+            'products' => Product::paginate(10)
         ]);
     }
 
@@ -36,11 +37,12 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  StoreProductRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request): RedirectResponse
+    public function store(StoreProductRequest $request): RedirectResponse
     {
+
         $product = New Product($request->all());
         if($request->hasFile('image')){
             $product->image_path = $request->file('image')->store('products');
@@ -79,11 +81,11 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  StoreProductRequest  $request
      * @param  \App\Models\Product  $product
      * @return RedirectResponse
      */
-    public function update(Request $request, Product $product)
+    public function update(StoreProductRequest $request, Product $product)
     {
 
         $product->fill($request->all());

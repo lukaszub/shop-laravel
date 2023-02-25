@@ -71,7 +71,7 @@
                     <label for="image" class="col-md-4 col-form-label text-md-end">Grafika</label>
 
                     <div class="col-md-6">
-                        <input id="image" type="file" class="form-control" name="image">
+                        <input id="image" type="file" class="form-control  @error('image') is-invalid @enderror" name="image">
 
                         @error('image')
                             <span class="invalid-feedback" role="alert">
@@ -83,7 +83,15 @@
 
                 <div class="form-group row justify-content-center">
                     <div class="col-md-6">
-                        <img src="{{ asset('storage/'.$product->image_path) }}"  alt="Zdjęcie produktu">
+                        @if (!is_null($product->image_path))
+                         <img src="{{ asset('storage/'.$product->image_path) }}" name="image" alt="Zdjęcie produktu">        
+                        @endif
+                       
+                        {{-- @error('image')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror --}}
                     </div>
                 </div>
 
