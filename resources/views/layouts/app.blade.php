@@ -78,10 +78,10 @@
         </main>
     </div>
         <!-- Scripts -->
-        <script src="{{ mix('js/app.js') }}"></script>
+        <script src="{{ asset('js/app.js') }}"></script>
         <script type="text/javascript">
             @yield('javascript')
         </script>
-        @yield('javascript-files')    
+        @yield('js-files')    
 </body>
 </html>

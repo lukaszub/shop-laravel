@@ -56,6 +56,6 @@
 @section('javascript')
   const deleteUrl = "{{ url('products') }}/";
 @endsection
-@section('javascript-files')
+@section('js-files')
   <script src="{{ asset('js/delete.js') }}"></script>
 @endsection
