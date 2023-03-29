@@ -23,7 +23,6 @@ class WelcomeController extends Controller
         $paginate = $request->query('paginate') ?? 5;
 
         $query = Product::query();
-        $query->paginate($paginate);
 
         if(!is_null($filters)){
            if(array_key_exists('categories',$filters)){
@@ -35,13 +34,11 @@ class WelcomeController extends Controller
            if(!is_null($filters['price_max'])){
             $query = $query->where('price','<=', $filters['price_max']); 
            }
-           return response()->json([
-            'data'=> $query->get()
-           ]);
+           return response()->json($query->paginate($paginate));
         }
 
         return view('welcome',[
-            'products' => $query->get(),
+            'products' => $query->paginate($paginate),
             'categories' => ProductCategory::orderBy('name', 'ASC')->get(),
             'defaultImage' => 'https://via.placeholder.com/240x240/5fa9f8/efefef'
         ]);
