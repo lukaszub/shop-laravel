@@ -2,6 +2,18 @@
 
 @section('content')
 <div class="container">
+  <div class="container">
+  @include('helpers.flash_messages')
+  <div class="row">
+    <div class="col-6">
+      <h1>Lista użytkowników</h1>
+    </div>
+    <div class="col-6">
+      <a class="float-end" href="{{ route('products.create') }}">
+        <button type="button"class="btn btn-primary">Dodaj</button>
+      </a>    
+    </div>
+  </div>
   <table class="table table-hover">
     <thead>
       <tr>
