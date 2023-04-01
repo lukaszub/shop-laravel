@@ -28,10 +28,12 @@ Route::get('/', [WelcomeController::class, 'index']);
 
 
 Route::middleware(['auth', 'verified'])->group(function(){
-  Route::resource('products', ProductController::class);
+  Route::middleware(['can:isAdmin'])->group(function(){
+    Route::resource('products', ProductController::class);
+    Route::get('/users/list', [UserController::class, 'index']);
+    Route::delete('/users/{user}', [UserController::class, 'destroy']);
+  });
 
-  Route::get('/users/list', [UserController::class, 'index'])->middleware('auth');
-  Route::delete('/users/{user}', [UserController::class, 'destroy'])->middleware('auth');
   Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home'); 
 });
 // Route::get('/products', [ProductController::class, 'index'])->name('products.index')->middleware('auth');
