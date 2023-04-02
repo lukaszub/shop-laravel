@@ -106,6 +106,13 @@
 @endsection
 
 @section('javascript')
+  const WELCOME_DATA = {
+        storagePath: '{{ asset('storage') }}/',
+        defaultImage: '{{ $defaultImage }}',
+        listCart: '{{ url('cart') }}',
+        addToCart: '{{ url('cart') }}/'
+    
+  }
  const storagePath = '{{ asset('storage') }}/';
  const defaultImage = '{{ $defaultImage }}/';
 @endsection
