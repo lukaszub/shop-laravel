@@ -9,6 +9,7 @@ use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\View\View as ViewView;
+use PSpell\Config;
 
 class WelcomeController extends Controller
 {
@@ -40,7 +41,7 @@ class WelcomeController extends Controller
         return view('welcome',[
             'products' => $query->paginate($paginate),
             'categories' => ProductCategory::orderBy('name', 'ASC')->get(),
-            'defaultImage' => 'https://via.placeholder.com/240x240/5fa9f8/efefef'
+            'defaultImage' => config('shop.defaultImage',)
         ]);
     }
 

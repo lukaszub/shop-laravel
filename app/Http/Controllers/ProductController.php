@@ -9,8 +9,11 @@ use Illuminate\Http\Request;
 use App\Models\ProductCategory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Response;
 use App\Http\Requests\StoreProductRequest;
 use Illuminate\Contracts\View\View as ViewView;
+use Illuminate\Support\Facades\Redirect;
 
 class ProductController extends Controller
 {
@@ -93,8 +96,12 @@ class ProductController extends Controller
     public function update(StoreProductRequest $request, Product $product)
     {
 
+        $oldImagePath = $product->image_path;
         $product->fill($request->all());
         if($request->hasFile('image')){
+            if(Storage::exists($oldImagePath)){
+                Storage::delete($oldImagePath);
+            }
             $product->image_path = $request->file('image')->store('products');
         }
         $product->save();
@@ -122,4 +129,20 @@ class ProductController extends Controller
             ])->setStatusCode(500);
         }
     }
+
+        /**
+     * Download image of the specified resource in storage.
+     *
+     * @param  \App\Models\Product  $product
+     * @return RedirectResponse
+     */
+    public function downloadImage(Product $product)
+    {
+            if(Storage::exists($product->image_path)){
+                 return Storage::download($product->image_path);
+             }
+
+        return Redirect::back();
+    }
+
 }
