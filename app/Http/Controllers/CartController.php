@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Dtos\CartDto;
-use App\Dtos\CartItemDto;
+use App\ValueObjects\Cart;
+use App\ValueObjects\CartItem;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreProductRequest;
 use Illuminate\Http\RedirectResponse;
@@ -21,7 +21,7 @@ class CartController extends Controller
      */
     public function index()
     {
-      dd(Session::get('cart', new CartDto()));
+      dd(Session::get('cart', new Cart()));
         return view('home');
     }
 
@@ -34,27 +34,9 @@ class CartController extends Controller
     public function store(Product $product)
     {
 
-      $cart = Session::get('cart', new CartDto());
-      $items = $cart->getItems();
-      //dd($items);
-      
-      if(Arr::exists($items, $product->id)){
-        $items[$product->id]->incementQuantity();
-      } else {
-
-        //$cartItemDto = $this->getCartItemDto($product);
-        $cartItemDto = new CartItemDto();
-        $cartItemDto->setProductId($product->id);
-        $cartItemDto->setPrice($product->price);
-        $cartItemDto->setQuantity(1);
-        $cartItemDto->setImagePath($product->image_path);
-        $items[$product->id] = $cartItemDto;
-      }
-      $cart->setItems($items);
-      $cart->incementTotalQuantity();
-      $cart->incementTotalSum($product->price);
-
-      Session::put('cart',$cart);
+      $cart = Session::get('cart', new Cart());
+  
+      Session::put('cart',$cart->addItem($product));
       return response()->json([
         'status' => 'success'
       ]);    
